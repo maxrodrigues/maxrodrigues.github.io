@@ -1,76 +1,109 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html data-theme="dark" lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Pessoal</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Max Rodrigues Portfólio</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+  <link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Space+Grotesk%3Awght%40400%3B500%3B700" onload="this.rel='stylesheet'" rel="stylesheet"/>
+  <script src="https://kit.fontawesome.com/fb91899bbd.js" crossorigin="anonymous"></script>
+  <style type="text/tailwindcss">
+    @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+    @theme {
+      --color-primary: #6B46C1;
+      --color-primary-hover: #37256a;
+      --color-secondary: #3B82F6;
+      --color-dark: #111121;
+      --color-light: #f6f6f8;
+
+      --font-display: "Space Grotesk", "sans-serif";
+      --font-body: "Noto Sans", "sans-serif";
+
+    }
+  </style>
 </head>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
-<script src="https://kit.fontawesome.com/fb91899bbd.js" crossorigin="anonymous"></script>
-
-<link rel="stylesheet" type="text/css" href="css/reset.css" />
-<link rel="stylesheet" type="text/css" href="css/style.css" />
-
-<body>
-    <header class="sidebar">
-        <div class="overlay">
-            <nav>
-                <ul class="navbar">
-                    <li class="nav-item">
-                        <a href="index.html">
-                            Home
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="repositories.html">
-                            Repositórios
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="about.html">
-                            Sobre
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <hr>
-            <div class="container">
-                <section class="profile">
-                    <img src="img/profile.png" alt="">
-                    <div class="name-quote">
-                        <h1>Maxuel Rodrigues</h1>
-                        <blockquote>
-                            Pergunte a si mesmo, quem você quer ser? Descubra por si mesmo o que o faz feliz, não importa o quão louco possa parecer para outras pessoas.
-                        </blockquote>
-                        <div class="author-quote">
-                            - Arnold Schwarzenegger
-                        </div>
-                    </div>
-                    <div class="social-icons">
-                        <a href="https://github.com/maxrodrigues" id="github">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/maxuel-rodrigues/" id="linkedin">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="https://twitter.com/Max_Rodrigues" id="twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="mailto:maxuel.rodrigues@gmail.com" id="envelope">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                    </div>
-                </section>
-            </div>
+<body class="bg-light dark:bg-dark font-body text-gray-800 dark:text-gray-300">
+  <header class="px-10 py-4 border-b border-gray-400">
+    <div class="flex justify-between items-center grid grid-cols-3">
+      <div class="flex items-center gap-3">
+        <i class="fa-solid fa-code text-primary text-2xl"></i>
+        <h1 class="text-2xl font-display font-bold text-gray-200">Max Rodrigues</h1>
+      </div>
+      <nav class="flex justify-center items-center gap-6">
+        <div>
+          <a href="#projects" class="text-gray-600 hover:text-primary transition-colors">Projetos</a>
         </div>
-    </header>
-    <main class="main">
-
-    </main>
+        <div>
+          <a href="#skills" class="text-gray-600 hover:text-primary transition-colors">Skills</a>
+        </div>
+        <div>
+          <a href="#about-me" class="text-gray-600 hover:text-primary transition-colors">Sobre Mim</a>
+        </div>
+        <div>
+          <a href="#contact" class="text-gray-600 hover:text-primary transition-colors">Contato</a>
+        </div>
+      </nav>
+      <div class="flex justify-end items-center gap-2">
+        <a href="https://github.com/maxrodrigues" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-github text-2xl text-primary hover:text-gray-600 trasition-colors"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/maxuel-rodrigues/" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-linkedin text-2xl text-primary hover:text-gray-600 trasition-colors"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+  <main class="flex justify-center items-center">
+    <div class="w-full max-w-5xl px-4">
+      <section class="mt-16" id="projects">
+        <h2 class="text-3xl font-bold font-display mb-5 text-gray-300 border-l border-l-5 border-l-primary px-3">Projetos</h2>
+        <div class="grid grid-cols-4 gap-4">
+          <div class="flex flex-col rounded-lg overflow-hidden group gap-2">
+            <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuB1mx_wekvT1H6MBkT098BXFMqWOmrC0gb7ZZAaEhGGeIxXdnbEh5Ae4EXNUBacfXsW8DZIQBMMBgyS5qfapW-iw23I2tmVV4ZlNO_q_b6bQLqV8HLDi-Dblhz59xPoCCic70UNdInwwbhUpxkXNi_5BkSXVA93pFG8I45Obw6pLbKdrL0MQwW5iSdRlJL5Fc38ZBiEESKyrIUl-HjwAyrYlnO0-MTPA74R4QlO4Xo2tEPwpBIwJFhBbA_aVTO6_xj6DckeHq9tLby8&quot;);"></div>
+            <div class="gap-3">
+              <p class="text-lg font-semibold font-display">Teste Name</p>
+              <p class="text-sm text-gray-600 text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet faucibus nibh. Nunc at efficitur tortor, eget egestas odio. Aliquam laoreet euismod varius.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="mt-16" id="skills">
+        <h2 class="text-3xl font-bold font-display mb-5 text-gray-300 border-l border-l-5 border-l-primary px-3">Skills</h2>
+        <div class="flex flex-wrap gap-2">
+          <div class="px-4 py-2 bg-primary hover:bg-primary-hover hover:text-white rounded font-medium text-sm">PHP</div>
+          <div class="px-4 py-2 bg-primary hover:bg-primary-hover hover:text-white rounded font-medium text-sm">Laravel</div>
+          <div class="px-4 py-2 bg-primary hover:bg-primary-hover hover:text-white rounded font-medium text-sm">MySQL</div>
+          <div class="px-4 py-2 bg-primary hover:bg-primary-hover hover:text-white rounded font-medium text-sm">Docker</div>
+          <div class="px-4 py-2 bg-primary hover:bg-primary-hover hover:text-white rounded font-medium text-sm">Git</div>
+          <div class="px-4 py-2 bg-primary hover:bg-primary-hover hover:text-white rounded font-medium text-sm">RESTful APIs</div>
+          <div class="px-4 py-2 bg-primary hover:bg-primary-hover hover:text-white rounded font-medium text-sm">Agile</div>
+          <div class="px-4 py-2 bg-primary hover:bg-primary-hover hover:text-white rounded font-medium text-sm">Problem Solving</div>
+          <div class="px-4 py-2 bg-primary hover:bg-primary-hover hover:text-white rounded font-medium text-sm">Github</div>
+          <div class="px-4 py-2 bg-primary hover:bg-primary-hover hover:text-white rounded font-medium text-sm">PHPUnit</div>
+          <div class="px-4 py-2 bg-primary hover:bg-primary-hover hover:text-white rounded font-medium text-sm">Scrum</div>
+          <div class="px-4 py-2 bg-primary hover:bg-primary-hover hover:text-white rounded font-medium text-sm">POO</div>
+          <div class="px-4 py-2 bg-primary hover:bg-primary-hover hover:text-white rounded font-medium text-sm">Bootstrap</div>
+          <div class="px-4 py-2 bg-primary hover:bg-primary-hover hover:text-white rounded font-medium text-sm">Tailwind</div>
+          <div class="px-4 py-2 bg-primary hover:bg-primary-hover hover:text-white rounded font-medium text-sm">React</div>
+          <div class="px-4 py-2 bg-primary hover:bg-primary-hover hover:text-white rounded font-medium text-sm">JQuery</div>
+          <div class="px-4 py-2 bg-primary hover:bg-primary-hover hover:text-white rounded font-medium text-sm">JSON</div>
+        </div>
+      </section >
+      <section class="mt-16" id="about-me">
+        <h2 class="text-3xl font-bold font-display mb-5 text-gray-300 border-l border-l-5 border-l-primary px-3">Sobre mim</h2>
+        <p class="landing-relaxed font-display text-justify text-md">Profissional com mais de mais 10 anos de na área de desenvolvimento, com experiência em projetos
+          escaláveis, APIs RESTful, microserviços e arquiteturas orientadas a serviços. Especialista em PHP
+          (Laravel), Ruby on Rails, JavaScript (React, jQuery) e aplicações em ambientes dockerizados. Ampla
+          atuação em integrações de sistemas, utilizando JSON, XML, MySQL e HTML, além de versionamento
+          de código com Git. Experiência em migração de plataformas legadas, modernização de stack
+          tecnológica, desenvolvimento de SaaS e automação de processos. Perfil analítico, com foco em
+          performance, segurança e escalabilidade. </p>
+      </section>
+      <section class="mt-16" id="contact">
+        <h2 class="text-3xl font-bold font-display mb-5 text-gray-300 border-l border-l-5 border-l-primary px-3">Contato</h2>
+      </section>
+    </div>
+  </main>
 </body>
 </html>
