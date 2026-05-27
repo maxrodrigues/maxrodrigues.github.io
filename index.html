@@ -1,76 +1,562 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html class="dark" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Pessoal</title>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>DevPortfolio | Building Digital Experiences</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
+    <!-- Geist Font simulation via generic sans with specific weight/letter-spacing as Geist isn't on standard Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --font-geist: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        body {
+            font-family: var(--font-geist);
+            scroll-behavior: smooth;
+            background-color: #0b0e15;
+            /* surface-container-lowest */
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .glass-card {
+            background: rgba(22, 37, 54, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid #233549;
+        }
+
+        .skill-node:hover {
+            border-color: #1A73E9;
+            box-shadow: 0 0 15px rgba(26, 115, 233, 0.2);
+        }
+
+        .project-card:hover {
+            border-color: #1A73E9;
+            transform: translateY(-4px);
+        }
+
+        @keyframes pulse-soft {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .status-pulse {
+            animation: pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#363941",
+                        "on-tertiary-fixed-variant": "#783100",
+                        "surface-container-lowest": "#0b0e15",
+                        "on-primary-fixed": "#001a41",
+                        "surface-container-high": "#272a31",
+                        "surface-tint": "#adc6ff",
+                        "background": "#10131a",
+                        "inverse-primary": "#005bc0",
+                        "on-primary": "#002e69",
+                        "on-secondary-fixed-variant": "#005235",
+                        "on-secondary-fixed": "#002113",
+                        "on-surface": "#e0e2ec",
+                        "surface-container-low": "#191c23",
+                        "on-background": "#e0e2ec",
+                        "on-error": "#690005",
+                        "tertiary": "#ffb691",
+                        "outline": "#8c909f",
+                        "primary-fixed": "#d8e2ff",
+                        "on-error-container": "#ffdad6",
+                        "on-surface-variant": "#c1c6d6",
+                        "surface-container": "#1d2027",
+                        "error": "#ffb4ab",
+                        "inverse-surface": "#e0e2ec",
+                        "tertiary-fixed": "#ffdbcb",
+                        "outline-variant": "#414754",
+                        "error-container": "#93000a",
+                        "on-primary-fixed-variant": "#004493",
+                        "on-primary-container": "#000514",
+                        "on-tertiary": "#552100",
+                        "on-secondary-container": "#003e27",
+                        "on-secondary": "#003823",
+                        "surface-container-highest": "#32353c",
+                        "tertiary-container": "#c55500",
+                        "secondary-fixed": "#70fbbb",
+                        "on-tertiary-fixed": "#341100",
+                        "secondary": "#50dea1",
+                        "on-tertiary-container": "#0e0200",
+                        "inverse-on-surface": "#2d3038",
+                        "primary-fixed-dim": "#adc6ff",
+                        "surface-variant": "#32353c",
+                        "surface-dim": "#10131a",
+                        "secondary-fixed-dim": "#50dea1",
+                        "tertiary-fixed-dim": "#ffb691",
+                        "primary": "#adc6ff",
+                        "surface": "#10131a",
+                        "secondary-container": "#01b47a",
+                        "primary-container": "#1a73e9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "stack-md": "16px",
+                        "base": "8px",
+                        "margin-mobile": "16px",
+                        "section-gap": "120px",
+                        "stack-sm": "8px",
+                        "stack-lg": "32px",
+                        "container-max": "1200px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-xl-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "code-sm": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-xl-mobile": ["40px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "code-sm": ["13px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                },
+            }
+        }
+    </script>
 </head>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
-<script src="https://kit.fontawesome.com/fb91899bbd.js" crossorigin="anonymous"></script>
-
-<link rel="stylesheet" type="text/css" href="css/reset.css" />
-<link rel="stylesheet" type="text/css" href="css/style.css" />
-
-<body>
-    <header class="sidebar">
-        <div class="overlay">
-            <nav>
-                <ul class="navbar">
-                    <li class="nav-item">
-                        <a href="index.html">
-                            Home
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="repositories.html">
-                            Repositórios
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="about.html">
-                            Sobre
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <hr>
-            <div class="container">
-                <section class="profile">
-                    <img src="img/profile.png" alt="">
-                    <div class="name-quote">
-                        <h1>Maxuel Rodrigues</h1>
-                        <blockquote>
-                            Pergunte a si mesmo, quem você quer ser? Descubra por si mesmo o que o faz feliz, não importa o quão louco possa parecer para outras pessoas.
-                        </blockquote>
-                        <div class="author-quote">
-                            - Arnold Schwarzenegger
+<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+    <!-- TopNavBar (Shared Component) -->
+    <nav
+        class="fixed top-0 w-full z-50 bg-surface-container-lowest/80 backdrop-blur-md dark:bg-surface-container-lowest/80 border-b border-outline-variant shadow-sm transition-all duration-300 ease-in-out">
+        <div class="flex justify-between items-center px-gutter py-4 max-w-container-max mx-auto">
+            <div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary">DevPortfolio</div>
+            <div class="hidden md:flex items-center gap-8">
+                <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors"
+                    href="#about">Sobre</a>
+                <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors"
+                    href="#projects">Projetos</a>
+                <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors"
+                    href="#skills">Skills</a>
+                <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors"
+                    href="#contact">Contato</a>
+            </div>
+            <button
+                class="bg-primary-container text-white px-6 py-2 rounded-lg font-body-md hover:opacity-90 transition-all">Resume</button>
+        </div>
+    </nav>
+    <main class="overflow-x-hidden">
+        <!-- Hero Section -->
+        <section class="min-h-screen flex flex-col justify-center items-center px-gutter pt-32 pb-section-gap relative">
+            <div class="absolute inset-0 overflow-hidden pointer-events-none">
+                <div class="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-primary/10 blur-[120px] rounded-full">
+                </div>
+                <div
+                    class="absolute -bottom-[10%] -right-[10%] w-[30%] h-[30%] bg-secondary/10 blur-[100px] rounded-full">
+                </div>
+            </div>
+            <div class="max-w-[900px] text-center z-10">
+                <div
+                    class="inline-flex items-center gap-2 mb-stack-lg px-4 py-1.5 rounded-full border border-outline-variant bg-surface-container-low">
+                    <span class="w-2 h-2 rounded-full bg-secondary status-pulse"></span>
+                    <span class="font-label-md text-label-md text-secondary uppercase tracking-widest">Disponível para Projetos e Consultorias</span>
+                </div>
+                <h1 class="font-headline-xl text-headline-xl md:text-headline-xl mb-stack-md text-on-surface tracking-tighter">
+                    Construindo Plataformas <span class="text-primary">SaaS Escaláveis</span> e <span class="text-primary">Sistemas de Alta Performance</span>
+                </h1>
+                <p class="font-body-lg text-body-lg text-on-surface-variant mb-stack-lg max-w-[650px] mx-auto">
+                    Sou Desenvolvedor Full Stack Sênior com mais de 10 anos de experiência. Especialista no ecossistema PHP (Laravel) , ajudo empresas a modernizarem sistemas legados , migrarem para microserviços e integrarem Inteligência Artificial de forma prática.
+                </p>
+                <div class="flex flex-col md:flex-row justify-center gap-stack-md">
+                    <a class="px-8 py-4 bg-primary-container text-white rounded-lg font-body-md text-body-md font-semibold hover:translate-y-[-2px] transition-all duration-300 shadow-lg shadow-primary-container/20" href="#projects">
+                        Conhecer Meu Trabalho
+                    </a>
+                    <a class="px-8 py-4 border border-outline-variant text-on-surface rounded-lg font-body-md text-body-md font-semibold hover:bg-surface-container-high transition-all duration-300" href="#contact">
+                        Vamos Conversar
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- About Section -->
+        <section class="py-section-gap px-gutter bg-surface-container-low border-y border-outline-variant" id="about">
+            <div class="max-w-container-max mx-auto grid md:grid-cols-2 gap-stack-lg items-center">
+                <div class="relative">
+                    <div
+                        class="w-full aspect-square max-w-[480px] rounded-2xl overflow-hidden border border-outline-variant shadow-2xl">
+                        <img alt="Professional portrait" class="w-full h-full object-cover"
+                            data-alt="A professional portrait of a tech-focused developer in a dark, atmospheric studio setting. The lighting is dramatic and moody, utilizing high-contrast shadows and cool blue rim lighting to emphasize a modern, digital aesthetic. The subject has a confident, calm expression, perfectly suited for a high-end corporate tech environment. The background is a blurred, dark industrial office with subtle geometric grid textures."
+                            src="img/profile.png" />
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 glass-card p-stack-lg rounded-xl hidden md:block">
+                        <div class="flex items-center gap-4">
+                            <span class="text-primary font-headline-lg text-headline-lg">10+</span>
+                            <span class="font-label-md text-label-md text-on-surface-variant uppercase">Anos
+                                de<br />Experiência</span>
                         </div>
                     </div>
-                    <div class="social-icons">
-                        <a href="https://github.com/maxrodrigues" id="github">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/maxuel-rodrigues/" id="linkedin">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="https://twitter.com/Max_Rodrigues" id="twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="mailto:maxuel.rodrigues@gmail.com" id="envelope">
-                            <i class="fas fa-envelope"></i>
-                        </a>
+                </div>
+                <div class="flex flex-col gap-stack-md">
+                    <h2 class="font-headline-lg text-headline-lg text-on-surface">
+                        Engenharia de Software com Precisão e <span class="text-primary">Foco em Resultados</span>
+                    </h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant">
+                        Com mais de uma década de trajetória na tecnologia , atuo na intersecção entre arquitetura robusta e entrega ágil. Minha especialidade é transformar desafios complexos de negócio em aplicações web modernas, seguras e extremamente rápidas.
+                    </p>
+                    <p class="font-body-md text-body-md text-on-surface-variant">
+                        Dominando o ecossistema PHP e Laravel , tenho um histórico sólido liderando o desenvolvimento de plataformas SaaS do zero , orquestrando ambientes complexos com Docker e implementando soluções de IA aplicadas — como sistemas de anonimização facial em conformidade com a LGPD. Seja para criar um novo produto digital ou para salvar um sistema legado crítico, eu entrego a arquitetura que sua empresa precisa para crescer.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mt-stack-md">
+                        <div class="p-4 rounded-lg bg-surface-container border border-outline-variant">
+                            <span class="material-symbols-outlined text-primary mb-2">terminal</span>
+                            <h4 class="font-label-md text-label-md text-on-surface font-bold">Backend First</h4>
+                            <p class="text-code-sm font-code-sm text-on-surface-variant mt-1">Robust Node.js &amp; Go
+                                architecture.</p>
+                        </div>
+                        <div class="p-4 rounded-lg bg-surface-container border border-outline-variant">
+                            <span class="material-symbols-outlined text-primary mb-2">palette</span>
+                            <h4 class="font-label-md text-label-md text-on-surface font-bold">Design Logic</h4>
+                            <p class="text-code-sm font-code-sm text-on-surface-variant mt-1">Clean, systematic UI with
+                                Tailwind.</p>
+                        </div>
                     </div>
-                </section>
+                </div>
+            </div>
+        </section>
+        <!-- Projects Section (Bento Grid Style) -->
+        <section class="py-section-gap px-gutter" id="projects">
+            <div class="max-w-container-max mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-stack-lg gap-stack-md">
+                    <div>
+                        <h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Featured Projects</h2>
+                        <p class="font-body-md text-body-md text-on-surface-variant max-w-lg">A selection of my recent
+                            works ranging from fintech platforms to open-source developer tools.</p>
+                    </div>
+                    <a class="text-primary font-label-md text-label-md flex items-center gap-1 hover:gap-2 transition-all"
+                        href="#">
+                        VIEW ALL REPOS <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+                    <!-- Project 1 (Large) -->
+                    <div
+                        class="md:col-span-8 group project-card bg-surface-container rounded-xl border border-outline-variant overflow-hidden transition-all duration-300">
+                        <div class="aspect-[16/9] overflow-hidden">
+                            <img alt="Fintech Dashboard"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                data-alt="A high-fidelity fintech dashboard interface displayed on a sleek monitor. The UI features complex data visualizations, including real-time stock charts and multi-layered crypto asset tracking in a dark mode aesthetic. The color palette is dominated by deep charcoal and navy, with vibrant emerald green and royal blue accents highlighting key financial metrics. The lighting is soft and ambient, casting a professional glow over a minimalist workstation."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDYlbYcNdN9uC7sOD6EJ7NTLpn1irfqVoc4lgAx33cHdMxdQPqVCvfOGNL135XSso2KQ3EqML1J6vFUkH2Y6ASppJJAu9iaDtuoAqriu89Z847uSQ__4bJ8ZkuoRH37UmhD2a--TOVc1yLcxZN7SyeBJRHgU5ekVnK36MBRRtwtreBKdyO1TbpzkBQkAMu5w32meEh29pl2INHGeT7FXI9r0VdjRs_D4PCWXDCc3nasuYrTPgGMrbQK1R2w-Aj9KH8M1jSo3KtjULs" />
+                        </div>
+                        <div class="p-stack-lg">
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span
+                                    class="px-3 py-1 bg-surface-container-highest rounded text-secondary font-label-md text-label-md border border-secondary/20">Next.js</span>
+                                <span
+                                    class="px-3 py-1 bg-surface-container-highest rounded text-secondary font-label-md text-label-md border border-secondary/20">GraphQL</span>
+                                <span
+                                    class="px-3 py-1 bg-surface-container-highest rounded text-secondary font-label-md text-label-md border border-secondary/20">PostgreSQL</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md text-on-surface mb-2">QuantFlow Analytics</h3>
+                            <p class="font-body-md text-body-md text-on-surface-variant mb-6">A real-time financial
+                                analytics platform capable of processing millions of data points per second. Implemented
+                                custom WebGL charts for ultra-high-performance visualization.</p>
+                            <div class="flex gap-4">
+                                <a class="flex items-center gap-2 text-on-surface font-label-md text-label-md hover:text-primary transition-colors"
+                                    href="#">
+                                    <span class="material-symbols-outlined text-[18px]">link</span> LIVE DEMO
+                                </a>
+                                <a class="flex items-center gap-2 text-on-surface font-label-md text-label-md hover:text-primary transition-colors"
+                                    href="#">
+                                    <span class="material-symbols-outlined text-[18px]">code</span> SOURCE
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Project 2 (Small) -->
+                    <div
+                        class="md:col-span-4 group project-card bg-surface-container rounded-xl border border-outline-variant overflow-hidden transition-all duration-300">
+                        <div class="aspect-square overflow-hidden">
+                            <img alt="Code Editor Plugin"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                data-alt="A detailed macro shot of a sleek, dark code editor interface featuring vibrant syntax highlighting in shades of neon green and electric blue. Lines of TypeScript code are visible, demonstrating clean architecture and sophisticated logic. The scene is shot with a shallow depth of field, emphasizing the crispness of the characters against a dark, tech-focused background. The overall aesthetic is professional, technical, and high-contrast."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCh4Dys6JwdutoNhjb_XbGZAM96oJnvWA4UGcac9OKYp7J8kHe8BsstuAHzJcaQgO7LTdvwfkQt8yrlJg6S9fVvEIKrakBB-BjHIjYtTY-LUrrRdD8uE8EY1N0M174DsLV3U9Nn2QJbu0H-DKw3Vhiu1wMgw5aiuQYaI0uMMJP3XKP17lw1g2WPfBEQhFq39AO70ukWaKe7_IbvYKfFvuDnQvv_7l6CHNwK1I-_9GPh4t3Zv2cUYy4WCZejL94rn_Qq3TgJ3yjdy46L" />
+                        </div>
+                        <div class="p-stack-lg">
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span
+                                    class="px-3 py-1 bg-surface-container-highest rounded text-secondary font-label-md text-label-md border border-secondary/20">Rust</span>
+                                <span
+                                    class="px-3 py-1 bg-surface-container-highest rounded text-secondary font-label-md text-label-md border border-secondary/20">VS
+                                    Code API</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md text-on-surface mb-2">Oxidized Theme</h3>
+                            <p class="font-body-md text-body-md text-on-surface-variant">An ultra-fast VS Code extension
+                                built with Rust for intelligent code highlighting and snippet management.</p>
+                        </div>
+                    </div>
+                    <!-- Project 3 (Medium) -->
+                    <div
+                        class="md:col-span-12 group project-card bg-surface-container rounded-xl border border-outline-variant overflow-hidden transition-all duration-300 flex flex-col md:flex-row">
+                        <div class="md:w-1/2 aspect-video overflow-hidden">
+                            <img alt="Cloud Infrastructure"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                data-alt="A futuristic, stylized representation of cloud server infrastructure. Glowing data pathways in neon blue and green weave between geometric server racks in a dark, atmospheric data center. The lighting is low-key and high-tech, focusing on the intricate connections and processing power of the system. The image conveys a sense of massive scale, digital precision, and high-performance engineering."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTcD5otZGUek9vJ53Ba9Z76H_NkqJghXfyD7QmaaJ411qwIXePkK0v1dTvVaLbfj6w1_O5vSnGSglUvdUSPST8NQQPUvUaQARq9wNhG_Z6H3rTbUxVp2E47M9huP-Vy10ITljcTd71ZEIWvPsSEGRS3eADDfwmwvOOdy9Z-MDffrCqeYgdSO6UuT1dp0W6BtM6bxJDpR-HN_QzUlI8oq3fOC_Wu1_HL1Xy-izMtunXDvjTEQrcX0EjcFnQyCCk8DZZ4GGnIUkdBqNY" />
+                        </div>
+                        <div class="p-stack-lg md:w-1/2 flex flex-col justify-center">
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span
+                                    class="px-3 py-1 bg-surface-container-highest rounded text-secondary font-label-md text-label-md border border-secondary/20">Docker</span>
+                                <span
+                                    class="px-3 py-1 bg-surface-container-highest rounded text-secondary font-label-md text-label-md border border-secondary/20">Kubernetes</span>
+                                <span
+                                    class="px-3 py-1 bg-surface-container-highest rounded text-secondary font-label-md text-label-md border border-secondary/20">AWS</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md text-on-surface mb-2">HyperScaler CI/CD</h3>
+                            <p class="font-body-md text-body-md text-on-surface-variant mb-6">A custom dev-ops pipeline
+                                designed for high-availability deployments. Reduced deployment times by 65% for a team
+                                of 40 engineers through intelligent caching and parallel orchestration.</p>
+                            <div class="flex gap-4">
+                                <a class="flex items-center gap-2 text-on-surface font-label-md text-label-md hover:text-primary transition-colors"
+                                    href="#">
+                                    <span class="material-symbols-outlined text-[18px]">description</span> CASE STUDY
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Skills Section -->
+        <section class="py-section-gap px-gutter bg-surface-container-low/50" id="skills">
+            <div class="max-w-container-max mx-auto">
+                <div class="text-center mb-stack-lg">
+                    <h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Habilidades Técnicas</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant">
+                        Ferramentas, liguagens e praticas que uso no dia-a-dia para dar vida aos meus projetos.
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-gutter">
+                    <!-- Tech Group 1 -->
+                    <div class="flex flex-col gap-4">
+                        <h4 class="font-label-md text-label-md text-primary uppercase tracking-widest">Frontend</h4>
+                        <div class="flex flex-col gap-2">
+                            <div class="skill-node p-4 bg-surface-container border border-outline-variant rounded-lg flex items-center gap-3 transition-all">
+                                <div class="w-2 h-2 rounded-full bg-secondary"></div>
+                                <span class="font-body-md text-body-md text-on-surface">ReactJS</span>
+                            </div>
+                            <div
+                                class="skill-node p-4 bg-surface-container border border-outline-variant rounded-lg flex items-center gap-3 transition-all">
+                                <div class="w-2 h-2 rounded-full bg-secondary"></div>
+                                <span class="font-body-md text-body-md text-on-surface">TypeScript</span>
+                            </div>
+                            <div
+                                class="skill-node p-4 bg-surface-container border border-outline-variant rounded-lg flex items-center gap-3 transition-all">
+                                <div class="w-2 h-2 rounded-full bg-secondary"></div>
+                                <span class="font-body-md text-body-md text-on-surface">Tailwind CSS</span>
+                            </div>
+                            <div
+                                class="skill-node p-4 bg-surface-container border border-outline-variant rounded-lg flex items-center gap-3 transition-all">
+                                <div class="w-2 h-2 rounded-full bg-secondary"></div>
+                                <span class="font-body-md text-body-md text-on-surface">VueJS</span>
+                            </div>
+                            <div
+                                class="skill-node p-4 bg-surface-container border border-outline-variant rounded-lg flex items-center gap-3 transition-all">
+                                <div class="w-2 h-2 rounded-full bg-secondary"></div>
+                                <span class="font-body-md text-body-md text-on-surface">Javascript</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tech Group 2 -->
+                    <div class="flex flex-col gap-4">
+                        <h4 class="font-label-md text-label-md text-primary uppercase tracking-widest">Backend</h4>
+                        <div class="flex flex-col gap-2">
+                            <div
+                                class="skill-node p-4 bg-surface-container border border-outline-variant rounded-lg flex items-center gap-3 transition-all">
+                                <div class="w-2 h-2 rounded-full bg-secondary"></div>
+                                <span class="font-body-md text-body-md text-on-surface">PHP / Laravel</span>
+                            </div>
+                            <div
+                                class="skill-node p-4 bg-surface-container border border-outline-variant rounded-lg flex items-center gap-3 transition-all">
+                                <div class="w-2 h-2 rounded-full bg-secondary"></div>
+                                <span class="font-body-md text-body-md text-on-surface">Ruby on Rails</span>
+                            </div>
+                            <div
+                                class="skill-node p-4 bg-surface-container border border-outline-variant rounded-lg flex items-center gap-3 transition-all">
+                                <div class="w-2 h-2 rounded-full bg-secondary"></div>
+                                <span class="font-body-md text-body-md text-on-surface">Node.js</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tech Group 3 -->
+                    <div class="flex flex-col gap-4">
+                        <h4 class="font-label-md text-label-md text-primary uppercase tracking-widest">DevOps & Infra</h4>
+                        <div class="flex flex-col gap-2">
+                            <div
+                                class="skill-node p-4 bg-surface-container border border-outline-variant rounded-lg flex items-center gap-3 transition-all">
+                                <div class="w-2 h-2 rounded-full bg-secondary"></div>
+                                <span class="font-body-md text-body-md text-on-surface">Docker</span>
+                            </div>
+                            <div
+                                class="skill-node p-4 bg-surface-container border border-outline-variant rounded-lg flex items-center gap-3 transition-all">
+                                <div class="w-2 h-2 rounded-full bg-secondary"></div>
+                                <span class="font-body-md text-body-md text-on-surface">AWS (S3, EC2, Rekognition)</span>
+                            </div>
+                            <div
+                                class="skill-node p-4 bg-surface-container border border-outline-variant rounded-lg flex items-center gap-3 transition-all">
+                                <div class="w-2 h-2 rounded-full bg-secondary"></div>
+                                <span class="font-body-md text-body-md text-on-surface">GitHub Actions</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tech Group 4 -->
+                    <div class="flex flex-col gap-4">
+                        <h4 class="font-label-md text-label-md text-primary uppercase tracking-widest">Tools</h4>
+                        <div class="flex flex-col gap-2">
+                            <div
+                                class="skill-node p-4 bg-surface-container border border-outline-variant rounded-lg flex items-center gap-3 transition-all">
+                                <div class="w-2 h-2 rounded-full bg-secondary"></div>
+                                <span class="font-body-md text-body-md text-on-surface">Clean Code</span>
+                            </div>
+                            <div
+                                class="skill-node p-4 bg-surface-container border border-outline-variant rounded-lg flex items-center gap-3 transition-all">
+                                <div class="w-2 h-2 rounded-full bg-secondary"></div>
+                                <span class="font-body-md text-body-md text-on-surface">Design Pattern</span>
+                            </div>
+                            <div
+                                class="skill-node p-4 bg-surface-container border border-outline-variant rounded-lg flex items-center gap-3 transition-all">
+                                <div class="w-2 h-2 rounded-full bg-secondary"></div>
+                                <span class="font-body-md text-body-md text-on-surface">Testes Unitários</span>
+                            </div>
+                            <div
+                                class="skill-node p-4 bg-surface-container border border-outline-variant rounded-lg flex items-center gap-3 transition-all">
+                                <div class="w-2 h-2 rounded-full bg-secondary"></div>
+                                <span class="font-body-md text-body-md text-on-surface">Microsserviços</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+        <!-- Contact Section -->
+        <section class="py-section-gap px-gutter" id="contact">
+            <div
+                class="max-w-container-max mx-auto bg-surface-container rounded-2xl border border-outline-variant overflow-hidden relative">
+                <div class="absolute inset-0 bg-primary/5 opacity-50 pointer-events-none"></div>
+                <div class="grid md:grid-cols-2 p-8 md:p-16 relative z-10">
+                    <div>
+                        <h2 class="font-headline-lg text-headline-lg text-on-surface mb-stack-md">
+                            Pronto para tirar sua ideia do papel ou <span class="text-primary">escalar sua plataforma?</span>
+                        </h2>
+                        <p class="font-body-md text-body-md text-on-surface-variant mb-stack-lg max-w-sm">
+                            Se você precisa de um especialista para desenvolver um projeto do zero, modernizar seu sistema atual ou de uma consultoria técnica dedicada, entre em contato.
+                        </p>
+                        <div class="flex flex-col gap-4">
+                            <div class="flex items-center gap-4 text-on-surface">
+                                <span class="material-symbols-outlined text-primary">mail</span>
+                                <span class="font-body-md">maxuel.rodrigues@gmail.com</span>
+                            </div>
+                            <div class="flex items-center gap-4 text-on-surface">
+                                <span class="material-symbols-outlined text-primary">location_on</span>
+                                <span class="font-body-md">Vitória, ES / Remoto</span>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="mt-stack-lg md:mt-0 flex flex-col gap-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <input
+                                class="bg-surface border border-outline-variant p-3 rounded-lg text-on-surface focus:outline-none focus:border-primary transition-all"
+                                placeholder="Nome" type="text" />
+                            <input
+                                class="bg-surface border border-outline-variant p-3 rounded-lg text-on-surface focus:outline-none focus:border-primary transition-all"
+                                placeholder="E-mail" type="email" />
+                        </div>
+                        <input
+                            class="bg-surface border border-outline-variant p-3 rounded-lg text-on-surface focus:outline-none focus:border-primary transition-all"
+                            placeholder="Assunto" type="text" />
+                        <textarea
+                            class="bg-surface border border-outline-variant p-3 rounded-lg text-on-surface focus:outline-none focus:border-primary transition-all"
+                            placeholder="Como posso ajudar no seu projeto?" rows="4"></textarea>
+                        <button
+                            class="bg-primary-container text-white py-4 rounded-lg font-body-md font-bold hover:opacity-90 transition-all shadow-xl shadow-primary-container/20"
+                            type="submit">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer (Shared Component) -->
+    <footer
+        class="bg-surface-container-low dark:bg-surface-container-low w-full py-stack-lg border-t border-outline-variant">
+        <div class="flex flex-col md:flex-row justify-between items-center px-gutter max-w-container-max mx-auto">
+            <div class="font-headline-md text-headline-md text-on-surface mb-stack-md md:mb-0">DevPortfolio</div>
+            <div
+                class="font-label-md text-label-md text-on-surface-variant text-center md:text-left mb-stack-md md:mb-0">
+                © 2024 Developer Portfolio. Built with precision.
+            </div>
+            <div class="flex gap-6">
+                <a class="text-on-surface-variant hover:text-secondary transition-colors font-label-md text-label-md uppercase tracking-wider"
+                    href="#">Github</a>
+                <a class="text-on-surface-variant hover:text-secondary transition-colors font-label-md text-label-md uppercase tracking-wider"
+                    href="#">LinkedIn</a>
+                <a class="text-on-surface-variant hover:text-secondary transition-colors font-label-md text-label-md uppercase tracking-wider"
+                    href="#">Twitter</a>
             </div>
         </div>
-    </header>
-    <main class="main">
+    </footer>
+    <script>
+        // Simple micro-interaction for smooth scrolling and header reduction on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('py-2');
+                nav.classList.remove('py-4');
+            } else {
+                nav.classList.add('py-4');
+                nav.classList.remove('py-2');
+            }
+        });
 
-    </main>
+        // Skill node interactive state simulation
+        document.querySelectorAll('.skill-node').forEach(node => {
+            node.addEventListener('mouseenter', () => {
+                node.style.transform = 'scale(1.02)';
+            });
+            node.addEventListener('mouseleave', () => {
+                node.style.transform = 'scale(1)';
+            });
+        });
+    </script>
 </body>
+
 </html>
